@@ -3,6 +3,7 @@ import { Text, View, Platform } from 'react-native';
 import Landing from './src/Landing';
 import Foto from './src/Foto';
 import Favorito from './src/Favorito';
+import ImagePicker from './src/ImagePicker';
 
 
 export default class App extends React.Component {
@@ -38,6 +39,11 @@ export default class App extends React.Component {
       case "favoritos":
         return(
           <Favorito switchScreen={this.switchScreen}/>
+        )
+          break;
+      case "ImagePicker":
+        return(
+            <ImagePicker switchScreen={this.switchScreen}/>
         )
           break;
       

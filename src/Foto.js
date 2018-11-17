@@ -3,16 +3,33 @@ import React, {Component} from 'react';
 import {View, Text, ImageBackground} from 'react-native';
 import { Header, Item, Left, Container, Body, Title, Right, Icon, Input, Button} from 'native-base';
 import Loader from './Loader';
+import ImagePicker from 'expo';
 
 var myBackground = require('../assets/Pantalla2.jpg')
 
-//create stuff
-class Search extends React.Component{
-    state = {
 
-    }
+
+//create stuff
+class Foto extends React.Component{
+    state = {
+        image: null,
+      };
+
+    pickImage = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          this.setState({ image: result.uri });
+        }
+      };
 
     render(){
+        let { image } = this.state;
         return(
             <View>
                 <ImageBackground source = {myBackground} style = {styles.backgroundStyle} imageStyle={styles.imageStyle}>
@@ -49,7 +66,7 @@ class Search extends React.Component{
                             large
                             block ={true}
                             style = {styles.buttonStyle}
-                            //onPress = {}
+                            onPress = {this.pickImage}
                             >
                             <Icon name='camera'style={styles.iconStyle} />
                             <Text style={styles.buttonText}>Toma una foto</Text>
@@ -119,4 +136,4 @@ const styles = {
   }
 
 //export stuff
-export default Search;
+export default Foto;

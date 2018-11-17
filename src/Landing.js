@@ -17,7 +17,7 @@ class landing extends React.Component{
                         <Button rounded warning
                         block ={true}
                         style = {styles.buttonStyle}
-                        onPress = {()=>this.props.switchScreen("foto")}
+                        onPress = {()=>this.props.switchScreen("ImagePicker")}
                         >
                         <Text style={styles.buttonText}>Empieza a buscar!</Text>
                         </Button>
