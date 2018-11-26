@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import {View, Text, ImageBackground} from 'react-native';
 import { Header, Item, Left, Container, Body, Title, Right, Icon, Input, Button} from 'native-base';
 import Loader from './Loader';
-import ImagePicker from 'expo';
+import {ImagePicker, Permissions} from 'expo';
+import key from './key';
 
 var myBackground = require('../assets/Pantalla2.jpg')
 
@@ -15,18 +16,47 @@ class Foto extends React.Component{
         image: null,
       };
 
-    pickImage = async () => {
+    pickPhoto = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [6, 9],
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            this.setState({ image: result.uri });
+        }
+    };
+    askPermissionsAsync = async () => {
+        await Permissions.askAsync(Permissions.CAMERA);
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        // you would probably do something to verify that permissions
+        // are actually granted, but I'm skipping that for brevity
+    };
+    takeAndUploadPhotoAsync= async () => {
+        // Display the camera to the user and wait for them to take a photo or to cancel
+        // the action
+        await this.askPermissionsAsync();
         let result = await ImagePicker.launchCameraAsync({
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: [6, 9],
         });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          this.setState({ image: result.uri });
+      
+        if (result.cancelled) {
+          return;
         }
-      };
+      
+        // ImagePicker saves the taken photo to disk and returns a local URI to it
+        let localUri = result.uri;
+        let filename = localUri.split('/').pop();
+      
+        // Infer the type of the image
+        let match = /\.(\w+)$/.exec(filename);
+        let type = match ? `image/${match[1]}` : `image`;
+      
+    } 
+    
 
     render(){
         let { image } = this.state;
@@ -66,7 +96,7 @@ class Foto extends React.Component{
                             large
                             block ={true}
                             style = {styles.buttonStyle}
-                            onPress = {this.pickImage}
+                            onPress = {this.takeAndUploadPhotoAsync}
                             >
                             <Icon name='camera'style={styles.iconStyle} />
                             <Text style={styles.buttonText}>Toma una foto</Text>
@@ -77,7 +107,7 @@ class Foto extends React.Component{
                             large
                             block ={true}
                             style = {styles.buttonStyle}
-                            //onPress = {}
+                            onPress = {this.pickPhoto}
                             >
                             <Icon name='image' style={styles.iconStyle} />
                             <Text style={styles.buttonText}>Selecciona de galería</Text>

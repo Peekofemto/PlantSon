@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Image, View } from 'react-native';
-import { ImagePicker } from 'expo';
+import { ImagePicker, Permissions } from 'expo';
 
   class ImagePickerScreen extends React.Component {
   state = {
@@ -41,12 +41,20 @@ import { ImagePicker } from 'expo';
     }
   };
 
+  askPermissionsAsync = async () => {
+    await Permissions.askAsync(Permissions.CAMERA);
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // you would probably do something to verify that permissions
+    // are actually granted, but I'm skipping that for brevity
+  };
+
     takeAndUploadPhotoAsync= async () => {
     // Display the camera to the user and wait for them to take a photo or to cancel
     // the action
+    await this.askPermissionsAsync();
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [6, 9],
     });
   
     if (result.cancelled) {
@@ -61,18 +69,6 @@ import { ImagePicker } from 'expo';
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
   
-    // Upload the image using the fetch and FormData APIs
-    let formData = new FormData();
-    // Assume "photo" is the name of the form field the server expects
-    formData.append('photo', { uri: localUri, name: filename, type });
-  
-    return await fetch(YOUR_SERVER_URL, {
-      method: 'POST',
-      body: formData,
-      header: {
-        'content-type': 'multipart/form-data',
-      },
-    });
 } 
 }
 const styles = {
