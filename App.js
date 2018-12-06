@@ -4,6 +4,7 @@ import Landing from './src/Landing';
 import Foto from './src/Foto';
 import Favorito from './src/Favorito';
 import ImagePicker from './src/ImagePicker';
+import Camara from './src/camara';
 
 
 export default class App extends React.Component {
@@ -15,16 +16,6 @@ export default class App extends React.Component {
     this.setState({currentScreen});
   }
   renderScreen = () =>{
- /*  if(this.state.currentScreen === "landing"){
-      return(
-        <Landing switchScreen={this.switchScreen}/>
-      )
-    }
-    else if(this.state.currentScreen === "foto"){
-        return(
-          <Foto switchScreen={this.switchScreen}/>
-        )
-    } */
     switch(this.state.currentScreen) {
       case "landing":
         return(
@@ -40,6 +31,11 @@ export default class App extends React.Component {
         return(
           <Favorito switchScreen={this.switchScreen}/>
         )
+          break;     
+      case "camara":
+          return(
+            <Camara switchScreen={this.switchScreen}/>
+          )
           break;
       case "ImagePicker":
         return(

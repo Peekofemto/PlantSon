@@ -1,6 +1,6 @@
 //import stuff
 import React, {Component} from 'react';
-import {View, Text, ImageBackground, Image} from 'react-native';
+import {View, Text, ImageBackground, Image, StyleSheet} from 'react-native';
 import {Header, CardItem,Card, Left, Container, Body, Title, Right, Icon, Thumbnail, Button, Content} from 'native-base';
 
 
@@ -61,48 +61,46 @@ class Favorito extends React.Component{
 
 }
 
-
-
-const styles = {
+const styles = StyleSheet.create({
     backgroundStyle: {
-      width: "100%",
-      height: "100%"
-    },
-    imageStyle: {
-        resizeMode: 'stretch'  
-    },
-    viewStyles: {
-        flex: 1,
-        flexDirection: 'column' 
-    },
-    viewHorizontalStyle: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    headerStyle: {
-        backgroundColor: 'orange',
-        height: 70
-    },
-    titleStyle: {
-        fontFamily: 'Roboto',
-        fontSize: 16,
-        color: '#FFF3E0',
-        fontWeight: 'bold'
-    },
-    buttonStyle: {
-      flexDirection: 'column',
-      margin: 5,
-      height: 100,
-      backgroundColor: 'orange'
-    },
-    buttonText: {
-        color: '#FFF3E0'
-    }, 
-    iconStyle: {
-        color: 'red'
-    }
-  }
+        width: "100%",
+        height: "100%"
+      },
+      imageStyle: {
+          resizeMode: 'stretch'  
+      },
+      viewStyles: {
+          flex: 1,
+          flexDirection: 'column' 
+      },
+      viewHorizontalStyle: {
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
+      },
+      headerStyle: {
+          backgroundColor: 'orange',
+          height: 70
+      },
+      titleStyle: {
+          fontFamily: 'Roboto',
+          fontSize: 16,
+          color: '#FFF3E0',
+          fontWeight: 'bold'
+      },
+      buttonStyle: {
+        flexDirection: 'column',
+        margin: 5,
+        height: 100,
+        backgroundColor: 'orange'
+      },
+      buttonText: {
+          color: '#FFF3E0'
+      }, 
+      iconStyle: {
+          color: 'red'
+      }
+});
 
   export default Favorito;

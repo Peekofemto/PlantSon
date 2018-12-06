@@ -1,6 +1,6 @@
 //import stuff
 import React from 'react';
-import {View, Text, ImageBackground} from 'react-native';
+import {View, Text, ImageBackground, StyleSheet} from 'react-native';
 import { Button } from 'native-base';
 
 var myBackground = require('../assets/landing.jpg');
@@ -28,7 +28,7 @@ class landing extends React.Component{
     }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   viewStyles:{
     flex: 1,
     flexDirection: 'column',
@@ -52,6 +52,7 @@ const styles = {
   buttonText:{
     color: 'white'
   }
-}
+});
+
 
 export default landing;
